@@ -1,6 +1,9 @@
-import { cacheLife } from "next/cache"
+import { cacheLife, cacheTag } from "next/cache"
 
 import { site } from "@/lib/site"
+
+/** Tags the cached release; the GitHub webhook expires it when a release changes. */
+export const releaseCacheTag = "github-release"
 
 export type ReleaseAsset = {
   name: string
@@ -48,10 +51,13 @@ function pickInstaller(assets: GitHubAsset[]): ReleaseAsset | null {
 /**
  * The latest published release, or null when there is none yet or GitHub is unreachable.
  * Cached for an hour so the page stays static and the API rate limit is never a concern.
+ * A release published on GitHub shows up right away through the webhook in
+ * `app/api/github-webhook`.
  */
 export async function getLatestRelease(): Promise<Release | null> {
   "use cache"
   cacheLife("hours")
+  cacheTag(releaseCacheTag)
 
   const headers: HeadersInit = {
     Accept: "application/vnd.github+json",
