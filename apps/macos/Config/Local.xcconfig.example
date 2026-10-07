@@ -1,0 +1,12 @@
+// Copy this file to Config/Local.xcconfig (git-ignored) and fill in your own values.
+
+// Your team ID, from developer.apple.com > Account > Membership details.
+DEVELOPMENT_TEAM = ABCDE12345
+
+// A bundle identifier you own.
+IMMOUNT_BUNDLE_ID = com.example.immount
+
+// Optional: Sparkle updates. Leave these out to build without updates.
+// In xcconfig files "//" starts a comment, so write "https:/$()/" for "https://".
+// IMMOUNT_UPDATE_FEED_URL = https:/$()/github.com/<owner>/<repo>/releases/latest/download/appcast.xml
+// IMMOUNT_UPDATE_PUBLIC_KEY = <the public key printed by Sparkle's generate_keys>

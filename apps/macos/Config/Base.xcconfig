@@ -1,0 +1,23 @@
+// Shared build settings. Your own values go in Config/Local.xcconfig, which is git-ignored:
+// copy Config/Local.xcconfig.example and fill it in. Nothing here is tied to one developer.
+
+// Your Apple Developer team ID. Required: the app group and Keychain sharing need signing.
+DEVELOPMENT_TEAM =
+
+// A bundle identifier you own. The File Provider extension is "<this>.FileProvider".
+IMMOUNT_BUNDLE_ID = com.example.immount
+
+// The app and the File Provider extension share this group for the account and listing cache,
+// and a Keychain access group with the same name for the API key.
+IMMOUNT_APP_GROUP = $(TeamIdentifierPrefix)$(IMMOUNT_BUNDLE_ID)
+
+// Sparkle updates. Leave both empty to build without updates: the app then hides every
+// update control. See "Releasing" in the README to publish your own.
+IMMOUNT_UPDATE_FEED_URL =
+IMMOUNT_UPDATE_PUBLIC_KEY =
+
+MACOSX_DEPLOYMENT_TARGET = 14.0
+
+#include "Version.xcconfig"
+
+#include? "Local.xcconfig"

@@ -1,0 +1,52 @@
+# git-cliff: release notes and CHANGELOG.md, generated from Conventional Commits.
+# https://git-cliff.org/docs/configuration
+#
+# Only user-facing changes to the Mac app are listed: feat, fix and perf commits that touch
+# apps/macos. Breaking changes are always listed, whatever their type.
+
+[changelog]
+header = """
+# Changelog
+
+All notable changes to Immount. This file is generated from commit messages by \
+[git-cliff](https://git-cliff.org) when a release is made; don't edit it by hand.
+
+"""
+body = """
+{% if version %}\
+## {{ version | trim_start_matches(pat="v") }} - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}\
+## Unreleased
+{% endif %}\
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | striptags | trim }}
+{% for commit in commits %}
+- {% if commit.breaking %}**Breaking:** {% endif %}\
+{% if commit.scope %}**{{ commit.scope }}:** {% endif %}\
+{{ commit.message | split(pat="\n") | first | trim | upper_first }}\
+{% endfor %}
+{% endfor %}\n
+"""
+trim = true
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+protect_breaking_commits = true
+filter_commits = true
+# Release tags of the Mac app.
+tag_pattern = "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+include_paths = ["apps/macos/**"]
+sort_commits = "oldest"
+commit_parsers = [
+    { message = "^feat", group = "<!-- 0 -->New" },
+    { message = "^fix", group = "<!-- 1 -->Fixed" },
+    { message = "^perf", group = "<!-- 2 -->Faster" },
+    { message = "^revert", group = "<!-- 3 -->Reverted" },
+    # Breaking changes of any other type still show up, thanks to protect_breaking_commits.
+    { message = ".*", group = "<!-- 4 -->Changed", skip = true },
+]
+
+[bump]
+features_always_bump_minor = true
+breaking_always_bump_major = true

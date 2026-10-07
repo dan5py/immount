@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ImmountAppGroup</key>
+	<string>$(IMMOUNT_APP_GROUP)</string>
+	<key>ImmountKeychainGroup</key>
+	<string>$(AppIdentifierPrefix)$(IMMOUNT_BUNDLE_ID)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!-- Self-hosted servers are often reached over plain HTTP on the local network. -->
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Immount reads the name of your Wi-Fi network to use the local server address when you are at home. macOS only shares the network name with apps allowed to use Location Services.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Immount reads the name of your Wi-Fi network to use the local server address when you are at home. macOS only shares the network name with apps allowed to use Location Services.</string>
+	<!-- Sparkle updates, configured in Config/Local.xcconfig. Empty values build without updates. -->
+	<key>SUFeedURL</key>
+	<string>$(IMMOUNT_UPDATE_FEED_URL)</string>
+	<key>SUPublicEDKey</key>
+	<string>$(IMMOUNT_UPDATE_PUBLIC_KEY)</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<!-- Required for sandboxed apps: Sparkle installs updates through its XPC installer. -->
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Immount connects to your Immich server, which may be on your local network.</string>
+</dict>
+</plist>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleSymbolName</key>
+			<string>ImmountSidebar</string>
+		</dict>
+	</dict>
+	<key>ImmountAppBundleID</key>
+	<string>$(IMMOUNT_BUNDLE_ID)</string>
+	<key>ImmountAppGroup</key>
+	<string>$(IMMOUNT_APP_GROUP)</string>
+	<key>ImmountKeychainGroup</key>
+	<string>$(AppIdentifierPrefix)$(IMMOUNT_BUNDLE_ID)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!-- Self-hosted servers are often reached over plain HTTP on the local network. -->
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Immount connects to your Immich server, which may be on your local network.</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionFileProviderDocumentGroup</key>
+		<string>$(IMMOUNT_APP_GROUP)</string>
+		<key>NSExtensionFileProviderSupportsEnumeration</key>
+		<true/>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.fileprovider-nonui</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).FileProviderExtension</string>
+	</dict>
+</dict>
+</plist>

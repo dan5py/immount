@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# A new push to the same branch or pull request makes the older run pointless.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kit:
+    # The app and the extension need a signing team, so the package tests are the gate.
+    runs-on: xcode-27
+    defaults:
+      run:
+        working-directory: apps/macos/ImmountKit
+    steps:
+      - uses: actions/checkout@v7
+      - run: xcodebuild -version && swift --version
+      - run: swift test
+
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Reads the pnpm version from packageManager in package.json. Pinned because the v6 tag
+      # still points to v6.0.10, which predates pnpm 12 support.
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm build

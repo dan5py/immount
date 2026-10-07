@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000000000000000000001 /* ImmountFileProvider.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* ImmountFileProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA0000000000000000000002 /* ImmountKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000016 /* ImmountKit */; };
+		AA0000000000000000000024 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000026 /* Sparkle */; };
+		AA0000000000000000000003 /* ImmountKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000014 /* ImmountKit */; };
+		AA0000000000000000000021 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* AppIcon.icon */; };
+		AA0000000000000000000022 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* AppIcon.icon */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA0000000000000000000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C14601D3075B01E00A27422 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000000000000000000010;
+			remoteInfo = ImmountFileProvider;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA0000000000000000000005 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+				AA0000000000000000000001 /* ImmountFileProvider.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C1460253075B01E00A27422 /* Immount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Immount.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000006 /* ImmountFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ImmountFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000007 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		AA0000000000000000000008 /* App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
+		AA0000000000000000000009 /* FileProvider-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FileProvider-Info.plist"; sourceTree = "<group>"; };
+		AA000000000000000000000A /* Immount.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Immount.entitlements; sourceTree = "<group>"; };
+		AA000000000000000000000B /* FileProvider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FileProvider.entitlements; sourceTree = "<group>"; };
+		AA000000000000000000000C /* ImmountKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ImmountKit; sourceTree = "<group>"; };
+		AA0000000000000000000020 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0C1460273075B01E00A27422 /* immount */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = immount;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000000D /* ImmountFileProvider */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ImmountFileProvider;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C1460223075B01E00A27422 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				AA0000000000000000000002 /* ImmountKit in Frameworks */,
+				AA0000000000000000000024 /* Sparkle in Frameworks */,
+			);
+		};
+		AA000000000000000000000E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				AA0000000000000000000003 /* ImmountKit in Frameworks */,
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C14601C3075B01E00A27422 = {
+			isa = PBXGroup;
+			children = (
+				0C1460273075B01E00A27422 /* immount */,
+				AA000000000000000000000D /* ImmountFileProvider */,
+				AA0000000000000000000023 /* Shared */,
+				AA000000000000000000000C /* ImmountKit */,
+				AA000000000000000000000F /* Config */,
+				0C1460263075B01E00A27422 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0C1460263075B01E00A27422 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C1460253075B01E00A27422 /* Immount.app */,
+				AA0000000000000000000006 /* ImmountFileProvider.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000000F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000007 /* Base.xcconfig */,
+				AA0000000000000000000008 /* App-Info.plist */,
+				AA000000000000000000000A /* Immount.entitlements */,
+				AA0000000000000000000009 /* FileProvider-Info.plist */,
+				AA000000000000000000000B /* FileProvider.entitlements */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000023 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000020 /* AppIcon.icon */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C1460243075B01E00A27422 /* immount */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C1460303075B01F00A27422 /* Build configuration list for PBXNativeTarget "immount" */;
+			buildPhases = (
+				0C1460213075B01E00A27422 /* Sources */,
+				0C1460223075B01E00A27422 /* Frameworks */,
+				0C1460233075B01E00A27422 /* Resources */,
+				AA0000000000000000000005 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000000000000000000015 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0C1460273075B01E00A27422 /* immount */,
+			);
+			name = immount;
+			packageProductDependencies = (
+				AA0000000000000000000016 /* ImmountKit */,
+				AA0000000000000000000026 /* Sparkle */,
+			);
+			productName = immount;
+			productReference = 0C1460253075B01E00A27422 /* Immount.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA0000000000000000000010 /* ImmountFileProvider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000011 /* Build configuration list for PBXNativeTarget "ImmountFileProvider" */;
+			buildPhases = (
+				AA0000000000000000000012 /* Sources */,
+				AA000000000000000000000E /* Frameworks */,
+				AA0000000000000000000013 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				AA000000000000000000000D /* ImmountFileProvider */,
+			);
+			name = ImmountFileProvider;
+			packageProductDependencies = (
+				AA0000000000000000000014 /* ImmountKit */,
+			);
+			productName = ImmountFileProvider;
+			productReference = AA0000000000000000000006 /* ImmountFileProvider.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C14601D3075B01E00A27422 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					0C1460243075B01E00A27422 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					AA0000000000000000000010 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = 0C1460203075B01E00A27422 /* Build configuration list for PBXProject "immount" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0C14601C3075B01E00A27422;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AA0000000000000000000017 /* XCLocalSwiftPackageReference "ImmountKit" */,
+				AA0000000000000000000025 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0C1460263075B01E00A27422 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C1460243075B01E00A27422 /* immount */,
+				AA0000000000000000000010 /* ImmountFileProvider */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C1460233075B01E00A27422 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				AA0000000000000000000021 /* AppIcon.icon in Resources */,
+			);
+		};
+		AA0000000000000000000013 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				AA0000000000000000000022 /* AppIcon.icon in Resources */,
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C1460213075B01E00A27422 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		AA0000000000000000000012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA0000000000000000000015 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000000000000000000010 /* ImmountFileProvider */;
+			targetProxy = AA0000000000000000000004 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0C14602E3075B01F00A27422 /* Debug configuration for PBXProject "immount" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000007 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0C14602F3075B01F00A27422 /* Release configuration for PBXProject "immount" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000007 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		0C1460313075B01F00A27422 /* Debug configuration for PBXNativeTarget "immount" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Config/Immount.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Immount;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(IMMOUNT_BUNDLE_ID)";
+				PRODUCT_NAME = Immount;
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0C1460323075B01F00A27422 /* Release configuration for PBXNativeTarget "immount" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Config/Immount.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Immount;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(IMMOUNT_BUNDLE_ID)";
+				PRODUCT_NAME = Immount;
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		AA0000000000000000000018 /* Debug configuration for PBXNativeTarget "ImmountFileProvider" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/FileProvider.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/FileProvider-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Immount;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(IMMOUNT_BUNDLE_ID).FileProvider";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000019 /* Release configuration for PBXNativeTarget "ImmountFileProvider" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Config/FileProvider.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/FileProvider-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Immount;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(IMMOUNT_BUNDLE_ID).FileProvider";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C1460203075B01E00A27422 /* Build configuration list for PBXProject "immount" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C14602E3075B01F00A27422 /* Debug configuration for PBXProject "immount" */,
+				0C14602F3075B01F00A27422 /* Release configuration for PBXProject "immount" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		0C1460303075B01F00A27422 /* Build configuration list for PBXNativeTarget "immount" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C1460313075B01F00A27422 /* Debug configuration for PBXNativeTarget "immount" */,
+				0C1460323075B01F00A27422 /* Release configuration for PBXNativeTarget "immount" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000011 /* Build configuration list for PBXNativeTarget "ImmountFileProvider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000018 /* Debug configuration for PBXNativeTarget "ImmountFileProvider" */,
+				AA0000000000000000000019 /* Release configuration for PBXNativeTarget "ImmountFileProvider" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AA0000000000000000000017 /* XCLocalSwiftPackageReference "ImmountKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ImmountKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA0000000000000000000025 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA0000000000000000000014 /* ImmountKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImmountKit;
+		};
+		AA0000000000000000000016 /* ImmountKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImmountKit;
+		};
+		AA0000000000000000000026 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA0000000000000000000025 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0C14601D3075B01E00A27422 /* Project object */;
+	validationLevel = 1;
+}

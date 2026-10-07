@@ -1,0 +1,158 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "display-p3:0.11765,0.14948,0.23922,1.00000",
+      "srgb:0.05882,0.08235,0.14510,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : false
+            }
+          ],
+          "image-name" : "Pink-folder.svg",
+          "name" : "Pink-folder",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -164.27109332223745,
+              -87.99999999999994
+            ]
+          }
+        },
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : false
+            }
+          ],
+          "image-name" : "Blue-folder.svg",
+          "name" : "Blue-folder",
+          "position-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : {
+                "scale" : 1,
+                "translation-in-points" : [
+                  -132,
+                  124
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : false
+            }
+          ],
+          "image-name" : "Green-folder.svg",
+          "name" : "Green-folder",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              80,
+              155.74339660403166
+            ]
+          }
+        },
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : false
+            }
+          ],
+          "image-name" : "Amber-folder.svg",
+          "name" : "Amber-folder",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              177,
+              -31
+            ]
+          }
+        },
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden-specializations" : [
+            {
+              "idiom" : "square",
+              "value" : false
+            }
+          ],
+          "image-name" : "Red-folder.svg",
+          "name" : "Red-folder",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              24,
+              -176
+            ]
+          }
+        }
+      ],
+      "name" : "Petals",
+      "opacity" : 1,
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    },
+    {
+      "hidden" : true,
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "hidden" : false,
+          "image-name" : "Group.svg",
+          "name" : "Group",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              16.728906677762552,
+              9.346146375641865
+            ]
+          }
+        }
+      ],
+      "name" : "Reference",
+      "opacity" : 0.2,
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

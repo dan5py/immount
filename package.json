@@ -1,0 +1,11 @@
+{
+  "name": "immount",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter website dev",
+    "build": "pnpm --filter website build",
+    "lint": "pnpm --filter website lint"
+  },
+  "packageManager": "pnpm@12.4.2"
+}

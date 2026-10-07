@@ -1,0 +1,12 @@
+.DS_Store
+
+# macOS app
+xcuserdata/
+DerivedData/
+build/
+.build/
+.swiftpm/
+apps/macos/Config/Local.xcconfig
+
+# JavaScript
+node_modules/
