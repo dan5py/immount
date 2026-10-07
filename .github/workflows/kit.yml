@@ -1,0 +1,38 @@
+name: ImmountKit
+
+# A separate workflow, because paths filters apply to whole workflows: the package tests don't
+# run for changes to the website alone, or for a release commit (version and changelog only).
+# A push that also touches other files still runs.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - apps/website/**
+      - CHANGELOG.md
+      - apps/macos/Config/Version.xcconfig
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - apps/website/**
+      - CHANGELOG.md
+      - apps/macos/Config/Version.xcconfig
+
+permissions:
+  contents: read
+
+# A new push to the same branch or pull request makes the older run pointless.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kit:
+    # The app and the extension need a signing team, so the package tests are the gate.
+    runs-on: xcode-27
+    defaults:
+      run:
+        working-directory: apps/macos/ImmountKit
+    steps:
+      - uses: actions/checkout@v7
+      - run: xcodebuild -version && swift --version
+      - run: swift test

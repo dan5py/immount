@@ -22,18 +22,8 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# The package tests are in kit.yml, so they can skip website-only changes.
 jobs:
-  kit:
-    # The app and the extension need a signing team, so the package tests are the gate.
-    runs-on: xcode-27
-    defaults:
-      run:
-        working-directory: apps/macos/ImmountKit
-    steps:
-      - uses: actions/checkout@v7
-      - run: xcodebuild -version && swift --version
-      - run: swift test
-
   website:
     runs-on: ubuntu-latest
     steps:
