@@ -1,6 +1,6 @@
 import { DownloadIcon } from "lucide-react";
-import Image from "next/image";
 
+import { AppIcon } from "@/components/app-icon";
 import { GitHubIcon } from "@/components/icons";
 import { Screenshot, screenshots } from "@/components/screenshot";
 import { buttonVariants } from "@/components/ui/button";
@@ -19,12 +19,9 @@ export function Hero({
     <section className="relative overflow-hidden">
       <Glow />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-6 pt-20 text-center sm:pt-28">
-        <Image
-          src="/images/app-icon.svg"
-          alt="The Immount app icon"
-          width={128}
-          height={128}
-          priority
+        <AppIcon
+          role="img"
+          aria-label="The Immount app icon"
           className="size-28 drop-shadow-[0_18px_30px_rgb(0_0_0/0.25)] sm:size-32"
         />
         <h1 className="mt-8 text-5xl font-bold tracking-tight text-balance sm:text-7xl">

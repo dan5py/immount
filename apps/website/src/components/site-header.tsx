@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { AppIcon } from "@/components/app-icon";
 import { HomeLink } from "@/components/home-link";
 import { GitHubIcon } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
@@ -18,13 +17,7 @@ export function SiteHeader({ downloadHref }: { downloadHref: string }) {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-6">
         <HomeLink className="flex items-center gap-2.5 font-semibold tracking-tight">
-          <Image
-            src="/images/app-icon.svg"
-            alt=""
-            width={28}
-            height={28}
-            className="size-7"
-          />
+          <AppIcon aria-hidden="true" className="size-7" />
           {site.name}
         </HomeLink>
         <nav
