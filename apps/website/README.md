@@ -15,3 +15,5 @@ A new release shows up right away through a GitHub webhook, which expires the ca
 Screenshots live in `public/screenshots/` as WebP captures of windows without their system shadow (`screencapture -o -l <window id>`); the page draws its own shadow. They were taken against the public Immich demo server.
 
 The social preview image is drawn by `src/app/opengraph-image.tsx` at build time. Its renderer can't read WebP or Google Fonts, so it uses the PNG screenshot and Inter TTFs in `assets/og/`; re-export the PNG when `finder-gallery.webp` changes (`sips -s format png --resampleWidth 1100 public/screenshots/finder-gallery.webp --out assets/og/finder-gallery.png`).
+
+Page analytics use [Umami](https://umami.is). Set `NEXT_PUBLIC_UMAMI_SCRIPT_URL` (e.g. `https://umami.example.com/script.js`) and `NEXT_PUBLIC_UMAMI_WEBSITE_ID` at build time; without both, no tracking script is loaded.
