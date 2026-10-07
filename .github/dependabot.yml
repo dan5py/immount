@@ -22,6 +22,10 @@ updates:
       website:
         patterns: ["*"]
         update-types: [minor, patch]
+    # Major versions often break Next.js, ESLint or Node compatibility, so they're done by hand.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     labels: [dependencies, "area: website"]
     commit-message:
       prefix: chore
