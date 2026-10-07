@@ -8,11 +8,13 @@ on:
     paths-ignore:
       - CHANGELOG.md
       - apps/macos/Config/Version.xcconfig
+      - README.md
   pull_request:
     branches: [main]
     paths-ignore:
       - CHANGELOG.md
       - apps/macos/Config/Version.xcconfig
+      - README.md
 
 permissions:
   contents: read
