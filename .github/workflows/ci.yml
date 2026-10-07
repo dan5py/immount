@@ -1,32 +1,50 @@
 name: CI
 
-# A release commit only changes the version and the changelog, which neither job reads. A push
-# that also touches other files still runs.
+# Every pull request runs this workflow, so the jobs can be required checks on main. A job whose
+# files didn't change is skipped, and a skipped job counts as passed. A release commit only
+# changes the version and the changelog, so it skips both.
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - CHANGELOG.md
-      - apps/macos/Config/Version.xcconfig
-      - README.md
   pull_request:
     branches: [main]
-    paths-ignore:
-      - CHANGELOG.md
-      - apps/macos/Config/Version.xcconfig
-      - README.md
 
 permissions:
   contents: read
+  # paths-filter lists the files of a pull request through the API.
+  pull-requests: read
 
 # A new push to the same branch or pull request makes the older run pointless.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-# The package tests are in kit.yml, so they can skip website-only changes.
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      website: ${{ steps.filter.outputs.website }}
+      kit: ${{ steps.filter.outputs.kit }}
+    steps:
+      # On push, paths-filter compares commits with git.
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            website:
+              - apps/website/**
+              - package.json
+              - pnpm-lock.yaml
+              - pnpm-workspace.yaml
+              - .github/workflows/ci.yml
+            kit:
+              - apps/macos/ImmountKit/**
+              - .github/workflows/ci.yml
+
   website:
+    needs: changes
+    if: needs.changes.outputs.website == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -40,3 +58,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm build
+
+  kit:
+    needs: changes
+    if: needs.changes.outputs.kit == 'true'
+    # The app and the extension need a signing team, so the package tests are the gate.
+    runs-on: xcode-27
+    defaults:
+      run:
+        working-directory: apps/macos/ImmountKit
+    steps:
+      - uses: actions/checkout@v7
+      - run: xcodebuild -version && swift --version
+      - run: swift test

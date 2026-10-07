@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or help
+    url: https://github.com/dan5py/immount/discussions/categories/q-a
+    about: Ask how to set up or use Immount.
+  - name: Security vulnerability
+    url: https://github.com/dan5py/immount/security/advisories/new
+    about: Report it privately, not in a public issue.

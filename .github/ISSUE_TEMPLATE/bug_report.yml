@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in Immount doesn't work as expected.
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Never paste your Immich API key**, and remove server addresses you don't want to share from text, logs and screenshots. To report a security problem, use [a private advisory](https://github.com/dan5py/immount/security/advisories/new) instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Immich in Finder
+        2. Go to Albums
+        3. ...
+  - type: input
+    id: immount-version
+    attributes:
+      label: Immount version
+      description: Shown in the About pane of Immount's settings.
+      placeholder: 1.0.2
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      description: Apple menu > About This Mac.
+      placeholder: macOS 27.0
+    validations:
+      required: true
+  - type: input
+    id: immich-version
+    attributes:
+      label: Immich server version
+      description: Shown in the Immich web app, at the bottom of the sidebar.
+      placeholder: "3.2.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Server address in use
+      options:
+        - Server URL (public)
+        - Local URL (home Wi-Fi)
+        - Not sure
+  - type: dropdown
+    id: permissions
+    attributes:
+      label: API key permissions
+      options:
+        - all
+        - Only the permissions listed in the README
+        - Other
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Optional. In Console.app, start streaming, search for "immount", reproduce the problem, then copy the relevant lines. Check them for addresses or names before pasting.
+      render: text
