@@ -5,11 +5,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { links, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+// Absolute so they also work from other pages; on the home page they only scroll.
 const sections = [
-  { href: "#features", label: "Features" },
-  { href: "#screenshots", label: "Screenshots" },
-  { href: "#release", label: "Release" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#features", label: "Features" },
+  { href: "/#screenshots", label: "Screenshots" },
+  { href: "/#release", label: "Release" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function SiteHeader({ downloadHref }: { downloadHref: string }) {

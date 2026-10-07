@@ -86,6 +86,11 @@ export async function getLatestRelease(): Promise<Release | null> {
   }
 }
 
+/** Straight to the installer when there is one, otherwise to the home page's release section. */
+export function getDownloadHref(release: Release | null) {
+  return release?.asset?.url ?? "/#release"
+}
+
 export function formatVersion(tag: string) {
   return tag.replace(/^v/i, "")
 }

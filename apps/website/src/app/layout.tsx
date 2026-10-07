@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next"
 import { Geist_Mono, Inter } from "next/font/google"
 
 import { Analytics } from "@/components/analytics"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { getDownloadHref, getLatestRelease } from "@/lib/github"
 import { site } from "@/lib/site"
 
 import "./globals.css"
@@ -21,7 +24,7 @@ const title = `${site.name}: ${site.tagline}`
 // The Open Graph image comes from app/opengraph-image.tsx; Twitter falls back to it.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title,
+  title: { default: title, template: `%s · ${site.name}` },
   description: site.description,
   applicationName: site.name,
   authors: [site.author],
@@ -50,11 +53,17 @@ export const viewport: Viewport = {
   ],
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// The header and footer live here, not in each page: Next.js keeps the scroll position when the
+// top of the new page is in view, and a sticky header at the top of a page always is.
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const release = await getLatestRelease()
+
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <SiteHeader downloadHref={getDownloadHref(release)} />
         {children}
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { AppIcon } from "@/components/app-icon"
 import { GitHubIcon } from "@/components/icons"
 import { links, site } from "@/lib/site"
@@ -20,6 +22,9 @@ export function SiteFooter() {
           <a href={links.issues} className="hover:text-foreground">
             Report an issue
           </a>
+          <Link href="/privacy" className="hover:text-foreground">
+            Privacy
+          </Link>
           <a href={links.github} aria-label="GitHub" className="hover:text-foreground">
             <GitHubIcon className="size-4.5" />
           </a>
