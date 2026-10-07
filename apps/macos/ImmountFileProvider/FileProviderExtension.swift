@@ -334,11 +334,14 @@ final class FileProviderExtension: NSObject, NSFileProviderReplicatedExtension, 
                     guard let identifier = pending.popFirst() else { return }
                     _ = group.addTaskUnlessCancelled {
                         guard let assetID = ItemID(identifier)?.assetID else { return (identifier, .success(nil)) }
+                        // One return after the do/catch (see `ListingStore.fetchContainers`).
+                        let result: Result<Data?, Error>
                         do {
-                            return (identifier, .success(try await client.thumbnail(assetID: assetID, large: large)))
+                            result = .success(try await client.thumbnail(assetID: assetID, large: large))
                         } catch {
-                            return (identifier, .failure(error))
+                            result = .failure(error)
                         }
+                        return (identifier, result)
                     }
                 }
                 for _ in 0..<6 { addNext() }

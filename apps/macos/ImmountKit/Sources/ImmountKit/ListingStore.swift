@@ -533,8 +533,12 @@ public actor ListingStore {
             func addNext() {
                 guard !Task.isCancelled, let container = queue.popFirst() else { return }
                 group.addTask {
-                    do { return (container, .success(try await fetch(container))) }
-                    catch { return (container, .failure(error)) }
+                    // One return after the do/catch: optimized builds (Swift 6.4) corrupt the
+                    // task's captures and result when it returns from both do and catch.
+                    let result: Result<[Entry], Error>
+                    do { result = .success(try await fetch(container)) }
+                    catch { result = .failure(error) }
+                    return (container, result)
                 }
             }
             for _ in 0..<max(1, min(maxConcurrent, containers.count)) { addNext() }
