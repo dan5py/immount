@@ -143,8 +143,8 @@ xcodebuild archive \
     -quiet
 
 echo "==> Exporting with Developer ID"
-options=$(mktemp -t immount-export).plist
-cat > $options <<EOF
+export_options=$(mktemp -t immount-export).plist
+cat > $export_options <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -160,11 +160,11 @@ cat > $options <<EOF
 EOF
 xcodebuild -exportArchive \
     -archivePath $archive \
-    -exportOptionsPlist $options \
+    -exportOptionsPlist $export_options \
     -exportPath $export_dir \
     -allowProvisioningUpdates \
     -quiet
-rm -f $options
+rm -f $export_options
 
 echo "==> Notarizing"
 submission=$out/Immount-notarize.zip
