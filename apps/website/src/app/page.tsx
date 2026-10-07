@@ -7,6 +7,7 @@ import { MenuBarSection } from "@/components/menu-bar"
 import { ReleaseSection } from "@/components/release"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { StructuredData } from "@/components/structured-data"
 import { getLatestRelease } from "@/lib/github"
 
 export default async function Home() {
@@ -16,6 +17,7 @@ export default async function Home() {
 
   return (
     <>
+      <StructuredData release={release} />
       <SiteHeader downloadHref={downloadHref} />
       <main className="flex-1">
         <Hero release={release} downloadHref={downloadHref} />

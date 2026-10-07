@@ -15,15 +15,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+const title = `${site.name}: ${site.tagline}`
+
+// The Open Graph image comes from app/opengraph-image.tsx; Twitter falls back to it.
 export const metadata: Metadata = {
-  title: `${site.name}: ${site.tagline}`,
+  metadataBase: new URL(site.url),
+  title,
   description: site.description,
   applicationName: site.name,
+  authors: [site.author],
+  creator: site.author.name,
+  category: "photography",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${site.name}: ${site.tagline}`,
+    title,
     description: site.description,
+    url: "/",
     type: "website",
     siteName: site.name,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: site.description,
   },
 }
 

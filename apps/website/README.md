@@ -13,3 +13,5 @@ The release card and download buttons read the latest GitHub release of `dan5py/
 A new release shows up right away through a GitHub webhook, which expires the cached release. In the repository's Settings > Webhooks, add one with payload URL `https://<site>/api/github-webhook`, content type `application/json`, a random secret, and only the "Releases" event. Set the same secret as `GITHUB_WEBHOOK_SECRET` on the server. Without the webhook the release updates within the hour.
 
 Screenshots live in `public/screenshots/` as WebP captures of windows without their system shadow (`screencapture -o -l <window id>`); the page draws its own shadow. They were taken against the public Immich demo server.
+
+The social preview image is drawn by `src/app/opengraph-image.tsx` at build time. Its renderer can't read WebP or Google Fonts, so it uses the PNG screenshot and Inter TTFs in `assets/og/`; re-export the PNG when `finder-gallery.webp` changes (`sips -s format png --resampleWidth 1100 public/screenshots/finder-gallery.webp --out assets/og/finder-gallery.png`).
