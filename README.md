@@ -1,6 +1,28 @@
-# Immount
+<p align="center">
+  <a href="https://immount.app">
+    <img src="apps/website/public/images/app-icon.svg" alt="Immount app icon" width="128" height="128">
+  </a>
+</p>
 
-Immich in your Finder. Immount mounts your [Immich](https://immich.app) library as a folder in the Finder sidebar, like iCloud Drive: browse albums, favorites, people, tags and your timeline, Quick Look photos, and drag originals into any app. Files download only when you open them.
+<h1 align="center">Immount</h1>
+
+<p align="center">
+  <strong>Immich in your Finder.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dan5py/immount/releases/latest"><img src="https://img.shields.io/github/v/release/dan5py/immount?label=release" alt="Latest release"></a>
+  <img src="https://img.shields.io/badge/macOS-14.0%2B-black?logo=apple" alt="macOS 14.0 or later">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/dan5py/immount" alt="MIT License"></a>
+</p>
+
+<p align="center">
+  <a href="https://immount.app">Website</a> ·
+  <a href="https://github.com/dan5py/immount/releases/latest">Download</a> ·
+  <a href="CHANGELOG.md">Changelog</a>
+</p>
+
+Immount mounts your [Immich](https://immich.app) library as a folder in the Finder sidebar, like iCloud Drive: browse albums, favorites, people, tags and your timeline, Quick Look photos, and drag originals into any app. Files download only when you open them.
 
 ```
 Immich/
