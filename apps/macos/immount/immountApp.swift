@@ -75,8 +75,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Before any window exists, so the Dock icon does not flash when it is hidden.
-        let showDock = UserDefaults.standard.object(forKey: Preferences.showDockIcon) as? Bool ?? true
-        NSApp.setActivationPolicy(showDock ? .regular : .accessory)
+        Self.restoreActivationPolicy()
     }
 
     /// Connected login launches stay quiet. A launch by hand or an unconfigured app
@@ -90,6 +89,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Opening the app again (Dock, Finder, Spotlight) shows Settings.
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // Reopening from Finder or Spotlight makes the app regular before this call, which would
+        // keep a hidden Dock icon after the window closes.
+        Self.restoreActivationPolicy()
         // Accessory apps also need activation when their window is visible behind another app.
         showSettings?()
         return false
@@ -124,6 +126,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Keep refreshes running after the window closes, even with both icons hidden.
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
+    }
+
+    /// Applies the Dock icon preference, without deactivating the app when it already matches.
+    private static func restoreActivationPolicy() {
+        let showDock = UserDefaults.standard.object(forKey: Preferences.showDockIcon) as? Bool ?? true
+        let policy: NSApplication.ActivationPolicy = showDock ? .regular : .accessory
+        guard NSApp.activationPolicy() != policy else { return }
+        NSApp.setActivationPolicy(policy)
     }
 }
 
