@@ -129,6 +129,7 @@ One-time setup on the releasing Mac:
   ```
   (`//` starts a comment in xcconfig files, hence `https:/$()/`.) The release script reads the repository from this URL.
 - A notarytool profile: `xcrun notarytool store-credentials immount-notary --apple-id <id> --team-id <team>`.
+- To publish from the script, the [GitHub CLI](https://cli.github.com) signed in: `brew install gh`, then `gh auth login`.
 
 Then, from `apps/macos/` with everything committed:
 
@@ -136,6 +137,7 @@ Then, from `apps/macos/` with everything committed:
 scripts/release.sh --preview   # the next version, build number and release notes
 scripts/release.sh             # build, notarize and package that release
 scripts/release.sh 2.0.0       # or pick the version yourself
+scripts/release.sh --publish   # build it, then commit, tag, push and create the GitHub release
 ```
 
 Versions and release notes come from the commit messages (see [Contributing](#contributing)), through [git-cliff](https://git-cliff.org) and `cliff.toml`:
@@ -145,7 +147,7 @@ Versions and release notes come from the commit messages (see [Contributing](#co
 - The notes list the `feat`, `fix` and `perf` commits (plus any breaking change). They appear in the update window and on the GitHub release, and the script regenerates `CHANGELOG.md` from all releases.
 - The build number is picked automatically: one more than the highest of `Config/Version.xcconfig` and every build already in the appcast (local and published), because Sparkle only installs a higher build.
 
-The script asks for confirmation, then archives, exports with Developer ID, notarizes, staples, zips, and generates the signed appcast in `build/release/updates/`. After a successful build it writes the new version to `Config/Version.xcconfig` and regenerates `CHANGELOG.md`, then prints the commands that commit them, tag the release, push, and create the GitHub release. It never runs those itself. Sparkle's tools (`generate_keys`, `generate_appcast`, `sign_update`) are in `build/release/SourcePackages/artifacts/sparkle/Sparkle/bin/` after the first run.
+The script asks for confirmation, then archives, exports with Developer ID, notarizes, staples, zips, and generates the signed appcast in `build/release/updates/`. After a successful build it writes the new version to `Config/Version.xcconfig` and regenerates `CHANGELOG.md`, then prints the commands that commit them, tag the release, push, and create the GitHub release (they work from any directory). With `--publish` it runs them itself: it checks before the build that `gh` is signed in, the working tree is clean and you are on a branch, pushes the branch and the tag atomically, and if a step fails prints the ones left to run. Sparkle's tools (`generate_keys`, `generate_appcast`, `sign_update`) are in `build/release/SourcePackages/artifacts/sparkle/Sparkle/bin/` after the first run.
 
 To test an update before publishing, serve a folder with an appcast locally and point a Debug build at it:
 

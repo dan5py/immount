@@ -4,6 +4,7 @@
 #   scripts/release.sh             the next version, from the commits since the last release
 #   scripts/release.sh 1.2.0       a specific version
 #   scripts/release.sh --preview   only show the version, build number and release notes
+#   --publish                      also commit, tag, push and create the GitHub release
 #   --yes                          skip the confirmation (required without a terminal, e.g. CI)
 #
 # Versions come from Conventional Commits through git-cliff (see cliff.toml at the repository
@@ -14,11 +15,13 @@
 # The build number (CFBundleVersion, which Sparkle compares) is one more than the highest of
 # Config/Version.xcconfig and every build already in the appcast, local or published.
 #
-# After a successful build the script writes Config/Version.xcconfig and CHANGELOG.md, then
-# prints the commands that commit, tag and publish the release. It never runs them itself.
+# After a successful build the script writes Config/Version.xcconfig and CHANGELOG.md. With
+# --publish it then commits them, tags the release, pushes the branch and the tag, and creates
+# the GitHub release; otherwise it prints those commands, which work from any directory.
 #
 # Needs, once per Mac:
 #   - git-cliff (brew install git-cliff).
+#   - For --publish, the GitHub CLI signed in (brew install gh; gh auth login).
 #   - Config/Local.xcconfig with your team, bundle ID, and IMMOUNT_UPDATE_FEED_URL and
 #     IMMOUNT_UPDATE_PUBLIC_KEY. The feed must be a GitHub "releases/latest/download" URL.
 #   - A notarytool keychain profile (default name "immount-notary"):
@@ -29,13 +32,15 @@ set -euo pipefail
 
 fail() { echo "error: $*" >&2; exit 1 }
 
-usage="usage: scripts/release.sh [<version>] [--preview] [--yes]"
+usage="usage: scripts/release.sh [<version>] [--preview] [--publish] [--yes]"
 preview=false
+publish=false
 confirmed=false
 version=
 for arg in "$@"; do
     case $arg in
         --preview) preview=true ;;
+        --publish) publish=true ;;
         --yes) confirmed=true ;;
         -*) fail $usage ;;
         *) [[ -z $version ]] || fail $usage; version=$arg ;;
@@ -49,8 +54,16 @@ command -v git-cliff >/dev/null || fail "git-cliff is not installed (brew instal
 git -C $repo_root rev-parse -q --verify HEAD >/dev/null || fail "the repository has no commits yet"
 
 # What gets built is the working tree; it must match the commit that will be tagged.
-if ! $preview && [[ -z ${ALLOW_DIRTY:-} && -n $(git -C $repo_root status --porcelain) ]]; then
-    fail "uncommitted changes; commit or stash them first (or set ALLOW_DIRTY=1)"
+if ! $preview && [[ -n $(git -C $repo_root status --porcelain) ]]; then
+    $publish && fail "uncommitted changes; --publish needs a clean working tree"
+    [[ -n ${ALLOW_DIRTY:-} ]] || fail "uncommitted changes; commit or stash them first (or set ALLOW_DIRTY=1)"
+fi
+
+# Checked before the build, so publishing can't fail on them after a long notarization.
+if ! $preview && $publish; then
+    command -v gh >/dev/null || fail "the GitHub CLI is not installed (brew install gh)"
+    gh auth status --hostname github.com >/dev/null 2>&1 || fail "the GitHub CLI is not signed in (gh auth login)"
+    git -C $repo_root symbolic-ref -q HEAD >/dev/null || fail "--publish needs a branch to push, not a detached HEAD"
 fi
 
 setting() {
@@ -121,7 +134,11 @@ print -r -- ${release_notes:-(no user-facing changes)}
 echo
 if ! $confirmed; then
     [[ -t 0 ]] || fail "no terminal to confirm in; pass --yes to release without asking"
-    read -q "?Build, notarize and package it? [y/N] " || { echo; exit 1 }
+    if $publish; then
+        read -q "?Build, notarize, package and publish it on GitHub? [y/N] " || { echo; exit 1 }
+    else
+        read -q "?Build, notarize and package it? [y/N] " || { echo; exit 1 }
+    fi
     echo
 fi
 
@@ -195,21 +212,46 @@ sed -i '' -E \
     $version_file
 cliff --tag v$version --output $repo_root/CHANGELOG.md 2>/dev/null
 
-notes_arg=--generate-notes
-[[ -f $notes ]] && notes_arg="--notes-file '$notes'"
 version_path=${version_file#$repo_root/}
+appcast=$updates/appcast.xml
+title="Immount $version"
+message="chore(release): v$version"
+notes_arg=--generate-notes
+[[ -f $notes ]] && notes_arg="--notes-file ${(q-)notes}"
+# Every command names the repository, so they run from any directory. The push is atomic, so
+# the tag never reaches GitHub without its commit, and the release only uses a pushed tag.
+git_cmd="git -C ${(q-)repo_root}"
+steps=(
+    "$git_cmd add ${(q-)version_path} CHANGELOG.md"
+    "$git_cmd commit -m ${(q-)message} -- ${(q-)version_path} CHANGELOG.md"
+    "$git_cmd tag v$version"
+    "$git_cmd push --atomic origin HEAD v$version"
+    "gh release create v$version ${(q-)zip} ${(q-)appcast} --repo $repo --title ${(q-)title} --verify-tag $notes_arg"
+)
+
 cat <<EOF
 
 Done: Immount $version ($build)
       $zip
-      $updates/appcast.xml
+      $appcast
 
-Updated $version_path and CHANGELOG.md. To publish (the appcast must be attached to every
-release, since the app reads the latest one):
-
-  git add $version_path CHANGELOG.md
-  git commit -m "chore(release): v$version"
-  git tag v$version
-  git push origin HEAD v$version
-  gh release create v$version '$zip' '$updates/appcast.xml' --repo $repo --title 'Immount $version' $notes_arg
+Updated $version_path and CHANGELOG.md.
 EOF
+
+if ! $publish; then
+    echo "To publish (the appcast must be attached to every release, since the app reads the latest one):"
+    echo
+    print -rl -- "  "${^steps}
+    exit 0
+fi
+
+for (( i = 1; i <= $#steps; i++ )); do
+    echo "==> ${steps[i]}"
+    if ! eval ${steps[i]}; then
+        echo "error: publishing stopped; once fixed, run the rest:" >&2
+        print -rl -- "  "${^steps[i,-1]} >&2
+        exit 1
+    fi
+done
+echo
+echo "Published: https://github.com/$repo/releases/tag/v$version"
