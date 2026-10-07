@@ -2,10 +2,18 @@ import { screenshots } from "@/components/screenshot"
 import { formatVersion, type Release } from "@/lib/github"
 import { links, site } from "@/lib/site"
 
-/** Describes the app to search engines (schema.org SoftwareApplication) as JSON-LD. */
+/**
+ * Describes the site and the app to search engines as JSON-LD. The WebSite entry gives Google
+ * the site name to show in results instead of the domain.
+ */
 export function StructuredData({ release }: { release: Release | null }) {
-  const data = {
-    "@context": "https://schema.org",
+  const website = {
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url,
+  }
+
+  const app = {
     "@type": "SoftwareApplication",
     name: site.name,
     description: site.description,
@@ -26,6 +34,8 @@ export function StructuredData({ release }: { release: Release | null }) {
       downloadUrl: release.asset?.url ?? release.url,
     }),
   }
+
+  const data = { "@context": "https://schema.org", "@graph": [website, app] }
 
   return (
     <script
