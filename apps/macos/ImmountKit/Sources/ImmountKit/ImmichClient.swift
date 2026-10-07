@@ -112,9 +112,12 @@ public struct ImmichClient: Sendable {
 
     // MARK: Endpoints
 
-    /// Public reachability check of the first address. Sent without the key.
+    /// Public reachability check of the first address. Sent without the key. An answer also
+    /// replaces an earlier failed probe, so requests go back to the address right away.
     public func ping(timeout: TimeInterval? = nil) async throws {
-        try await ping(base: serverURL, timeout: timeout)
+        let base = serverURL
+        try await ping(base: base, timeout: timeout)
+        Reachability.shared.record(base, reachable: true)
     }
 
     private func ping(base: URL, timeout: TimeInterval?) async throws {
@@ -317,7 +320,7 @@ public struct ImmichClient: Sendable {
         let bases = endpoints()
         for (index, base) in bases.enumerated() {
             let isLast = index == bases.count - 1
-            if !isLast, await !isReachable(base) { continue }
+            if !isLast, try await !isReachable(base) { continue }
             do {
                 return try await operation(base)
             } catch let error as URLError where !isLast && error.isConnectionFailure {
@@ -327,9 +330,13 @@ public struct ImmichClient: Sendable {
         throw URLError(.cannotFindHost)
     }
 
-    private func isReachable(_ base: URL) async -> Bool {
+    private func isReachable(_ base: URL) async throws -> Bool {
         if let cached = Reachability.shared.cached(base) { return cached }
         let reachable = (try? await ping(base: base, timeout: Self.probeTimeout)) != nil
+        // A probe cut short by cancellation says nothing about the address. Remembering it as
+        // down would send every request to the next address for a while, e.g. when a newer
+        // health check replaces this one right after the Mac joins the home network.
+        try Task.checkCancellation()
         Reachability.shared.record(base, reachable: reachable)
         return reachable
     }

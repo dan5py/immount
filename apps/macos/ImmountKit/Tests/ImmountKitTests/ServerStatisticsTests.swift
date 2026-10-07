@@ -149,6 +149,40 @@ import Testing
         }
         #expect(attempts.withLock { $0 } == 1)
     }
+
+    /// A health check replaced right after the Mac joins the home network cancels its probe.
+    /// That must not make every request skip the local server for the next 30 seconds.
+    @Test func aCancelledProbeDoesNotMarkTheAddressUnreachable() async {
+        let local = URL(string: "https://cancelled-\(UUID().uuidString).example.invalid")!
+        let (probing, probeStarted) = AsyncStream<Void>.makeStream()
+        let fixture = StatisticsFixture { request in
+            guard request.url?.host() == local.host() else { return .json(#"{"res":"pong"}"#) }
+            probeStarted.yield()
+            return .noAnswer
+        }
+        let remote = fixture.base
+        let client = ImmichClient(apiKey: "test-key", session: fixture.session) { [local, remote] }
+        let measurement = Task { try await client.measureResponseTime() }
+        var events = probing.makeAsyncIterator()
+        await events.next()
+        measurement.cancel()
+
+        // Cancelled, not answered from the server URL as if the local one were down.
+        await #expect(throws: CancellationError.self) { try await measurement.value }
+        #expect(Reachability.shared.cached(local) == nil)
+    }
+
+    @Test func aSuccessfulPingReplacesAFailedProbe() async throws {
+        let local = URL(string: "https://recovered-\(UUID().uuidString).example.invalid")!
+        let fixture = StatisticsFixture { _ in .json(#"{"res":"pong"}"#) }
+        Reachability.shared.record(local, reachable: false)
+        try await ImmichClient(serverURL: local, apiKey: "", session: fixture.session).ping(timeout: 3)
+
+        let remote = fixture.base
+        let client = ImmichClient(apiKey: "test-key", session: fixture.session) { [local, remote] }
+        let sample = try await client.measureResponseTime()
+        #expect(sample.serverURL == local)
+    }
 }
 
 /// Each ephemeral session has its own registered handler. Parallel tests cannot replace each
@@ -183,6 +217,9 @@ private final class StatisticsURLProtocol: URLProtocol, @unchecked Sendable {
         static func json(_ body: String, status: Int = 200) -> Self {
             Self(status: status, body: Data(body.utf8))
         }
+
+        /// Leaves the request pending until it is cancelled.
+        static let noAnswer = Self(status: 0, body: Data())
     }
 
     typealias Handler = @Sendable (URLRequest) throws -> Reply
@@ -199,6 +236,7 @@ private final class StatisticsURLProtocol: URLProtocol, @unchecked Sendable {
                 throw URLError(.resourceUnavailable)
             }
             let reply = try handler(request)
+            if reply.status == Reply.noAnswer.status { return }
             let response = HTTPURLResponse(url: url, statusCode: reply.status, httpVersion: "HTTP/1.1", headerFields: ["Content-Type": "application/json"])!
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             client?.urlProtocol(self, didLoad: reply.body)
