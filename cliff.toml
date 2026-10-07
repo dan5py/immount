@@ -2,7 +2,8 @@
 # https://git-cliff.org/docs/configuration
 #
 # Only user-facing changes to the Mac app are listed: feat, fix and perf commits that touch
-# apps/macos. Breaking changes are always listed, whatever their type.
+# apps/macos, except those scoped to the website. Breaking changes are always listed, whatever
+# their type.
 
 [changelog]
 header = """
@@ -32,19 +33,22 @@ trim = true
 [git]
 conventional_commits = true
 filter_unconventional = true
-protect_breaking_commits = true
+protect_breaking_commits = false
 filter_commits = true
 # Release tags of the Mac app.
 tag_pattern = "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
 include_paths = ["apps/macos/**"]
 sort_commits = "oldest"
 commit_parsers = [
+    # Website commits that also touch apps/macos stay out of the app's notes.
+    { field = "scope", pattern = "(?i)^website$", skip = true },
     { message = "^feat", group = "<!-- 0 -->New" },
     { message = "^fix", group = "<!-- 1 -->Fixed" },
     { message = "^perf", group = "<!-- 2 -->Faster" },
     { message = "^revert", group = "<!-- 3 -->Reverted" },
-    # Breaking changes of any other type still show up, thanks to protect_breaking_commits.
-    { message = ".*", group = "<!-- 4 -->Changed", skip = true },
+    # Breaking changes of any other type still show up.
+    { field = "breaking", pattern = "true", group = "<!-- 4 -->Changed" },
+    { message = ".*", skip = true },
 ]
 
 [bump]
