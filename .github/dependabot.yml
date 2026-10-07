@@ -1,0 +1,28 @@
+version: 2
+
+# Sparkle is added through the Xcode project, which Dependabot doesn't read, and ImmountKit has no
+# dependencies, so Swift packages are updated by hand.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+    labels: [dependencies]
+    commit-message:
+      prefix: ci
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      website:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    labels: [dependencies, "area: website"]
+    commit-message:
+      prefix: chore
+      include: scope
