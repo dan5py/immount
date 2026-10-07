@@ -135,6 +135,7 @@ xcodebuild archive \
     -project $root/immount.xcodeproj \
     -scheme immount \
     -configuration Release \
+    -destination 'generic/platform=macOS' \
     -archivePath $archive \
     -clonedSourcePackagesDirPath $packages \
     MARKETING_VERSION=$version \
