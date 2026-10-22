@@ -50,18 +50,18 @@ function pickInstaller(assets: GitHubAsset[]): ReleaseAsset | null {
 
 /**
  * The latest published release, or null when there is none yet or GitHub is unreachable.
- * Cached for an hour so the page stays static and the API rate limit is never a concern.
- * A release published on GitHub shows up right away through the webhook in
- * `app/api/github-webhook`.
+ * The webhook expires this cache; a five-minute refresh also covers missed deliveries
+ * and deployments that finish after the webhook has reached the previous server.
  */
 export async function getLatestRelease(): Promise<Release | null> {
   "use cache"
-  cacheLife("hours")
+  cacheLife({ stale: 60, revalidate: 300, expire: 600 })
   cacheTag(releaseCacheTag)
 
   const headers: HeadersInit = {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
+    "Cache-Control": "no-cache",
   }
   if (process.env.GITHUB_TOKEN) {
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
@@ -70,6 +70,9 @@ export async function getLatestRelease(): Promise<Release | null> {
   try {
     const response = await fetch(`https://api.github.com/repos/${site.repo}/releases/latest`, {
       headers,
+      // The tagged function owns caching. Next's implicit build-time fetch cache
+      // is separate and untagged, so it can reuse an old release across builds.
+      cache: "no-store",
     })
     if (!response.ok) return null
     const release = (await response.json()) as GitHubRelease
