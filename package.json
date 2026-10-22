@@ -7,5 +7,8 @@
     "build": "pnpm --filter website build",
     "lint": "pnpm --filter website lint"
   },
-  "packageManager": "pnpm@12.4.2"
+  "packageManager": "pnpm@12.4.2",
+  "engines": {
+    "node": "24.22.1"
+  }
 }
